@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMS Leadership Engine - Premium Infographic</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --accent-1: #38bdf8;
+            /* Cyan */
+            --accent-2: #8b5cf6;
+            /* Violet */
+            --accent-3: #ec4899;
+            /* Pink */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background-color: #0f172a !important;
+            }
+
+            .blob {
+                display: none !important;
+                /* 印刷時のバグを防ぐため背景のぼんやりした光は消す */
+            }
+
+            @page {
+                size: A3 landscape;
+                /* 横長の大きな図なのでA3横を指定 */
+                margin: 0;
+            }
+        }
+
+        /* Background animated blobs */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .blob-1 {
+            top: 5%;
+            left: 10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(56, 189, 248, 0.3);
+        }
+
+        .blob-2 {
+            bottom: 5%;
+            right: 10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(139, 92, 246, 0.3);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            top: 40%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            background: rgba(236, 72, 153, 0.2);
+            transform: translateX(-50%);
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(50px, 50px) scale(1.1);
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: -0.05em;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .desktop-engine {
+            position: relative;
+            width: 1400px;
+            height: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            margin-bottom: 50px;
+            max-width: 95vw;
+        }
+
+        /* Baumkuchen SVG */
+        .baumkuchen {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .core-circle {
+            fill: rgba(15, 23, 42, 0.9);
+            stroke: rgba(139, 92, 246, 0.6);
+            stroke-width: 3px;
+            filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.4));
+            transition: all 0.4s ease;
+            cursor: pointer;
+            transform-origin: 700px 600px;
+        }
+
+        .core-circle:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 60px rgba(139, 92, 246, 0.7));
+        }
+
+        .slice-group {
+            cursor: pointer;
+            transform-origin: 700px 600px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .slice-path {
+            fill: rgba(255, 255, 255, 0.05);
+            stroke: #0f172a;
+            stroke-width: 4px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .slice-1 .slice-path {
+            stroke: rgba(56, 189, 248, 0.4);
+        }
+
+        .slice-2 .slice-path {
+            stroke: rgba(139, 92, 246, 0.4);
+        }
+
+        .slice-3 .slice-path {
+            stroke: rgba(236, 72, 153, 0.4);
+        }
+
+        .slice-group:hover {
+            transform: scale(1.03);
+            z-index: 30;
+        }
+
+        .slice-group.slice-1:hover .slice-path {
+            fill: rgba(56, 189, 248, 0.1);
+            stroke: var(--accent-1);
+            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.4));
+            stroke-width: 4px;
+        }
+
+        .slice-group.slice-2:hover .slice-path {
+            fill: rgba(139, 92, 246, 0.1);
+            stroke: var(--accent-2);
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
+            stroke-width: 4px;
+        }
+
+        .slice-group.slice-3:hover .slice-path {
+            fill: rgba(236, 72, 153, 0.1);
+            stroke: var(--accent-3);
+            filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.4));
+            stroke-width: 4px;
+        }
+
+        /* HTML Content inside SVG */
+        .node-content {
+            color: var(--text-main);
+            padding: 20px 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .phase-name {
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .text-1 {
+            color: var(--accent-1);
+        }
+
+        .text-2 {
+            color: var(--accent-2);
+        }
+
+        .text-3 {
+            color: var(--accent-3);
+        }
+
+        .node-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .node-content ul {
+            list-style: none;
+        }
+
+        .node-content li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .node-content li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .node-content li strong {
+            color: #fff;
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .core-text {
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .core-text h2 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .core-text .tags {
+            font-size: 1.1rem;
+            color: var(--accent-1);
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .core-text .sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header>
+        <h1>MMS Leadership Engine</h1>
+        <p class="subtitle">「正論による反発」を「自走」へ変える。OS（在り方）から駆動する右回りの循環プロセス</p>
+    </header>
+
+    <div class="desktop-engine">
+
+        <!-- ViewBox 1400x1200, Center is 700,600. Center Circle Radius = 210, meaning it covers X:490~910, Y:390~810 -->
+        <svg class="baumkuchen" viewBox="0 0 1400 1200" preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Phase 1: Top Slice -->
+            <g class="slice-group slice-1">
+                <!-- R=550, r=210, Center=700,600. Angle: -150 to -30 -->
+                <path class="slice-path"
+                    d="M 408.9 355.8 L 223.7 325.0 A 550 550 0 0 1 1176.3 325.0 L 1057.1 470.0 L 881.9 495.0 A 210 210 0 0 0 518.1 495.0 Z" />
+                <!-- テキストを広々と配置。Yの最大=380なので、Circle Top(390)の完全に上に配置され、絶対被らない -->
+                <foreignObject x="350" y="40" width="700" height="340">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="node-content">
+                        <div class="phase-name text-1">Step 1：関係性の土台づくり</div>
+                        <h3>関係基盤の構築</h3>
+                        <ul>
+                            <li>
+                                <strong>価値観の傾聴と受容</strong>
+                                正論を押し付けず、まずは聞く
+                            </li>
+                            <li>
+                                <strong>7秒コーチング</strong>
+                                評価ではなく「存在」を強烈に承認する
+                            </li>
+                            <li>
+                                <strong>究極の自己開示</strong>
+                                自身の弱さ（過去の降格等）を共有し、圧倒的な心理的安全性を生む
+                            </li>
+                        </ul>
+                    </div>
+                </foreignObject>
+            </g>
+
+            <!-- Phase 2: Bottom Right Slice -->
+            <g class="slice-group slice-2">
+                <!-- R=550, r=210. Angle: -30 to 90 -->
+                <path class="slice-path"
+                    d="M 1057.1 470.0 L 1176.3 325.0 A 550 550 0 0 1 700.0 1150.0 L 634.0 974.2 L 700.0 810.0 A 210 210 0 0 0 881.9 495.0 Z" />
+                <!-- Xが920始まりなので、Circle Right(910)の完全に右に配置され、絶対被らない -->
+                <foreignObject x="920" y="520" width="460" height="500">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="node-content" style="padding: 20px 20px;">
+                        <div class="phase-name text-2">Step 2：対話とアサーション</div>
+                        <h3>対話と方向づけ</h3>
+                        <ul>
+                            <li>
+                                <strong>現場検証</strong>
+                                フィルターを外し、事実と感情を切り離す
+                            </li>
+                            <li>
+                                <strong>アサーション</strong>
+                                「受容」の土台があるからこそ、耳の痛い要求がスッと通る
+                            </li>
+                            <li>
+                                <strong>コーチング的1on1</strong>
+                                指示を与えず、メンバーの意図と自発性を引き出す
+                            </li>
+                        </ul>
+                    </div>
+                </foreignObject>
+            </g>
+
+            <!-- Phase 3: Bottom Left Slice -->
+            <g class="slice-group slice-3">
+                <!-- R=550, r=210. Angle: 90 to 210 -->
+                <path class="slice-path"
+                    d="M 634.0 974.2 L 700.0 1150.0 A 550 550 0 0 1 223.7 325.0 L 408.9 355.8 L 518.1 495.0 A 210 210 0 0 0 700.0 810.0 Z" />
+                <!-- Width460でX20始まりなので、Xの最大は480。Circle Left(490)の完全に左に配置され、絶対被らない -->
+                <foreignObject x="20" y="520" width="460" height="500">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="node-content" style="padding: 20px 20px;">
+                        <div class="phase-name text-3">Step 3：チームへの波及と牽引</div>
+                        <h3>波及と自律化（自走）</h3>
+                        <ul>
+                            <li>
+                                <strong>共有ゾーンの形成</strong>
+                                個人の方向と会社の方向性を交わらせ、総論賛成を作る
+                            </li>
+                            <li>
+                                <strong>ストーリーテリング</strong>
+                                心底「価値がある」と信じるビジョンを、原体験から語る
+                            </li>
+                            <li>
+                                <strong>自律的ルールの創出</strong>
+                                ルール作りや現場の改善そのものもメンバーに委ねることで、過去最高の会議が生まれる
+                            </li>
+                        </ul>
+                    </div>
+                </foreignObject>
+            </g>
+
+            <!-- Center Core OS -->
+            <!-- foreignObjectの四角形がスライスのパスにかぶらないようサイズを絞る -->
+            <g class="core-group">
+                <circle class="core-circle" cx="700" cy="600" r="210" />
+                <foreignObject x="520" y="420" width="360" height="360">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="core-text">
+                        <h2>【絶対的な土台】<br>自己の在り方 (OS)</h2>
+                        <div class="tags">
+                            自分への深い理解<br>
+                            ブレないコア（核）の発見
+                        </div>
+                        <div class="sub">
+                            ライフイノベーションマップ（価値観の発掘）<br>
+                            アンカリング（常に良い状態を保つ）
+                        </div>
+                    </div>
+                </foreignObject>
+            </g>
+
+        </svg>
+
+    </div>
+
+</body>
+
+</html>
